@@ -1,7 +1,13 @@
 use student_management;
 
--- thong ke so luong hoc vien cac lop
-select name, count(*) as total_students from classes group by classes_id;
+-- Thống kê số lượng học viên theo lớp
+select c.name as ClassName, count(s.student_id) as StudentCount
+from Classes c
+join Students s on c.classes_id = s.classes_id
+group by c.name;
 
--- thong ke so luong hoc vien tai cac tinh
-select address, count(*) as count from address group by address_id;
+-- Thống kê số lượng các tỉnh
+select a.address as Province, count(s.student_id) as StudentCount
+from Address a
+join Students s on a.address_id = s.address_id
+group by a.address;

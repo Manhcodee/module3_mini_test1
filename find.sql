@@ -9,6 +9,8 @@ select * from students where fullname like 'nguyen%';
 
 select * from students where fullname like 'bui%';
 
+select * from students where fullname like '% anh%';
+
 select * from students where age between 15 and 18;
 
 select * from students where student_id in (31, 32);
