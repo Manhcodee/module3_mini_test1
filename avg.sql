@@ -11,5 +11,14 @@ select c.name as CourseName, round(avg(p.point), 2) as MaxAgePoint
 from Course c
 join Point p on c.course_id = p.course_id
 group by c.name
-order by MaxAgePoint desc
-limit 1;
+having round(avg(p.point), 2) = (
+    select round(max(avg_point), 2)
+    from (
+        select avg(p.point) as avg_point
+        from Course c
+        join Point p on c.course_id = p.course_id
+        group by c.name
+    ) as temp
+);
+
+
