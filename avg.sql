@@ -21,4 +21,16 @@ having round(avg(p.point), 2) = (
     ) as temp
 );
 
+-- all
+SELECT course_id, AVG(point) AS avg_point
+FROM Point
+GROUP BY course_id
+HAVING AVG(point) = all (
+    SELECT MAX(avg_point)
+    FROM (
+        SELECT AVG(point) AS avg_point
+        FROM Point
+        GROUP BY course_id
+    ) AS subquery
+);
 
